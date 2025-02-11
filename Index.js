@@ -1,0 +1,15 @@
+const express = require("express")
+const app = express()
+const PORT = 4000
+const urlroute  = require('./route/url')
+const staticroute  = require('./route/Static')
+const connect = require ('./db/db')
+const Url = require('./model/Url')
+app.set("view engine","ejs")
+connect()
+app.use(express.json())
+app.use(express.urlencoded({extended:false}))
+app.use('/url',urlroute)
+
+app.use('/',staticroute)
+app.listen(PORT,()=>console.log(`Server listen in this ${PORT}`))
