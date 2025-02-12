@@ -3,6 +3,9 @@
 A simple URL shortener application built with **Node.js**, **Express.js**, and **EJS** for templating.
 
 ## Features
+- User authentication using **cookies** and **UUID generator**.
+- Only logged-in users can generate short URLs.
+- Users can only see the URLs they have generated and their visit history.
 - Submit a long URL to generate a short URL.
 - View a list of generated URLs.
 - Track visit history length.
@@ -38,33 +41,49 @@ A simple URL shortener application built with **Node.js**, **Express.js**, and *
 ## Project Structure
 ```
 url-shortener/
-url-shortener/
+s   # CSS for styling the app
 │-- views/
 │   ├── index.ejs   # Main EJS template
 │-- routes/
 │   ├── urlRoutes.js # Routes for handling URL requests
 │   ├── staticRoutes.js # Routes for serving static files
+│   ├── userRoutes.js # Routes for user authentication
 │-- controllers/
 │   ├── urlController.js # Logic for handling requests
+│   ├── authController.js # User authentication logic
+│   ├── userController.js # User-related logic
 │-- models/
 │   ├── urlModel.js # Database schema and model
+│   ├── userModel.js # User authentication schema and model
 │-- db/
-│   ├── database.js # Database connection setup
+│   ├── db.js # Database connection setup
+│-- middleware/
+│   ├── authMiddleware.js # Authentication middleware using cookies and UUID
+│-- services/
+│   ├── auth.js # Authentication service logic
 │-- server.js       # Express server
 │-- package.json    # Project dependencies
 │-- README.md       # Project documentation
 ```
 
+## Authentication
+- Users are assigned a **UUID** upon login, stored in a cookie.
+- Only authenticated users can generate and view their own URLs.
+- Users can only track their own visit history.
+
 ## Usage
-1. Enter a long URL in the input field and click "Submit".
-2. A shortened URL will be generated.
-3. The table displays all generated URLs with their visit history.
+1. **Login** (UUID is generated and stored in a cookie).
+2. Enter a long URL in the input field and click "Submit".
+3. A shortened URL will be generated.
+4. Users can only see the list of URLs they have created and their visit history.
 
 ## Technologies Used
 - **Node.js**
 - **Express.js**
 - **EJS** (Embedded JavaScript)
 - **CSS** (for styling)
+- **MongoDB** (for database storage)
+- **Cookies & UUID** for authentication
 
 ## License
 This project is open-source and available under the **MIT License**.
