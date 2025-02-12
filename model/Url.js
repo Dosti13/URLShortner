@@ -1,7 +1,7 @@
 const mongoose = require("mongoose") 
 
-const urlSchema= mongoose.Schema({
-
+const urlSchema= mongoose.Schema(
+    {
 
         redirecturl:{
             type:String,
@@ -13,10 +13,15 @@ const urlSchema= mongoose.Schema({
             required:true,
             unique:true
         },
-        visithistor:[{timestamp: {type:Number}}]
+        visithistor:[{timestamp: {type:Number}}],
+        createdBy: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "users",
+          },
+        
 
 
-},    {timestamp:true}
+},    {timestamps:true}
 
 )
 
