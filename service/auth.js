@@ -6,7 +6,6 @@ function setuser(user){
   return jwt.sign({
         _id:user._id,
         eami:user.email,
-        password:user.password
     },process.env.JWT_SECRET_KEY)
 }
 function getuser(token){
