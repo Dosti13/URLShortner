@@ -3,6 +3,7 @@ const shortId = require("shortid")
 
 async function handleviews(req,res){
     if(!req.user) return res.render("Login")
+        
     const  Urldata = await Url.find({createdBy: req.user._id }) 
     res.render('index',{ urls:Urldata})
 }
@@ -12,7 +13,6 @@ async function shorturl(req,res) {
     
     if(!body.Url) return res.status(400).json({error:"url dede "})
         const ShortId = shortId()
-    console.log("Short id",ShortId);
     await Url.create ({
 
         redirecturl:body.Url,
@@ -29,7 +29,6 @@ async function shorturl(req,res) {
 }
 async function redirect(req,res) {
     const Shortid = req.params.Shortid
-    console.log(Shortid);
     
     const entry = await Url.findOneAndUpdate(
     {
@@ -42,7 +41,6 @@ async function redirect(req,res) {
             },
         },
     })
-    console.log(entry);
     
     res.redirect(entry.redirecturl)
 }
@@ -51,7 +49,6 @@ async function getanlaytics (req,res){
     const Shortid = req.params.Shortid
     if (!shortId) return res/JSON({error:"something "})
     const result = await Url.findOne({Shortid})
-    console.log(result);
     
     return res.json({
         totalclicks:result.visithistor.length,

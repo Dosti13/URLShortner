@@ -8,6 +8,8 @@ const connect = require ('./db/db')
 const Url = require('./model/Url')
 const cookieparser = require("cookie-parser")
 const {handleloginsesssion,getAuth} = require("./middlewear/Auth")
+require("dotenv").config()
+
 app.set("view engine","ejs")
 connect()
 app.use(express.json())
